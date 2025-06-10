@@ -6,6 +6,10 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).send('Backend is healthy');
+});
+
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });
