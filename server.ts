@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-    res.status(200).send('Backend is healthy');
+    res.status(200).send('Backend is running');
 });
 
 app.listen(port, () => {
