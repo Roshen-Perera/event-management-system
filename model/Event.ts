@@ -6,5 +6,5 @@ export default class Event {
     createdBy!: string;
     capacity!: number;
     remaining_capacity!: number;
-    tags !: string[];
+    tags !: string;
 }
