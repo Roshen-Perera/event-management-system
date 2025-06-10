@@ -1,15 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model attendee {
+  name          String
+  email         String          @id @unique(map: "Attendee_email_key")
+  eventattendee eventattendee[]
+}
+
+model event {
+  name               String          @id @unique(map: "Event_name_key")
+  description        String
+  date               DateTime
+  location           String
+  createdBy          String
+  capacity           Int
+  remaining_capacity Int
+  tags               String
+  eventattendee      eventattendee[]
+}
+
+model eventattendee {
+  eventName     String
+  attendeeEmail String
+  attendee      attendee @relation(fields: [attendeeEmail], references: [email], onDelete: Cascade, map: "EventAttendee_attendeeEmail_fkey")
+  event         event    @relation(fields: [eventName], references: [name], onDelete: Cascade, map: "EventAttendee_eventName_fkey")
+
+  @@id([eventName, attendeeEmail])
 }
