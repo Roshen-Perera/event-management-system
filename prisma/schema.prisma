@@ -8,9 +8,9 @@ datasource db {
 }
 
 model attendee {
-  name          String
-  email         String          @id
-  eventattendee eventattendee[]
+  name              String
+  email             String          @id
+  registered_events EventAttendee[]
 }
 
 model event {
@@ -23,10 +23,10 @@ model event {
   capacity           Int
   remaining_capacity Int
   tags               String
-  eventattendee      eventattendee[]
+  registrations      EventAttendee[]
 }
 
-model eventattendee {
+model EventAttendee {
   eventId       String
   attendeeEmail String
   attendee      attendee @relation(fields: [attendeeEmail], references: [email], onDelete: Cascade)
