@@ -1,6 +1,6 @@
 import express from "express";
 import Events from "../model/Events";
-import {addEvent, deleteEvent} from "../service/event-service";
+import {addEvent, deleteEvent, updateField} from "../service/event-service";
 
 const router = express.Router();
 
@@ -37,5 +37,23 @@ router.delete("/delete/:id", async (req, res) =>{
         }
     }
 })
+
+router.put("/update/:id", async (req, res) => {
+    console.log("Updating event...");
+    const id:string = req.params.id;
+    const event: Events = req.body;
+    try{
+        await updateField(id, event)
+        res.send(204).send("Event updated successfully");
+    } catch (error){
+        console.log("error updating event", error);
+        if(error.message === 'This event doesnt exists'){
+            res.status(404).send(error.message);
+        } else {
+            res.status(500).send("An error occurred while updating the event.");
+        }
+    }
+})
+
 
 export default router;
