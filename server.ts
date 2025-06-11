@@ -1,5 +1,6 @@
 import express from 'express';
 import eventRoute from "./routes/event-route";
+import attendeeRoute from "./routes/attendee-route";
 const app = express();
 const port = 3000;
 
@@ -18,3 +19,4 @@ app.listen(port, () => {
 });
 
 app.use('/event', eventRoute)
+app.use('/attendee', attendeeRoute)

@@ -12,8 +12,8 @@ export async function addAttendee(attendee: Attendee){
                 email: "jane@example.com",
                 registered_events: {
                     create: [
-                        { eventId: "event-uuid-1" },
-                        { eventId: "event-uuid-2" }
+                        { eventId: "55ee2ff5-5865-4059-8e6b-0075b0208c17" },
+                        { eventId: "5c4d39e7-fc8f-4dca-b8d3-4980d2f9f0b9" }
                     ]
                 }
             }
