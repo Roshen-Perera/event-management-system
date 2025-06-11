@@ -1,6 +1,6 @@
 import express from "express";
 import Events from "../model/Events";
-import {addEvent, deleteEvent, updateField} from "../service/event-service";
+import {addEvent, deleteEvent, getAllEvents, updateField} from "../service/event-service";
 
 const router = express.Router();
 
@@ -55,5 +55,14 @@ router.put("/update/:id", async (req, res) => {
     }
 })
 
+router.get("/get", async (req, res) => {
+    console.log("Fetching all events");
+    try{
+        const events = await getAllEvents();
+        res.status(200).json(events);
+    } catch (error) {
+        console.log("Error getting events",error)
+    }
+})
 
 export default router;
