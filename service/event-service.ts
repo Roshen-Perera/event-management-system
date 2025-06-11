@@ -46,3 +46,25 @@ export async function deleteEvent(id: string){
     }
 }
 
+export async function updateField(id: string, event: Events){
+    try{
+        await prisma.event.update({
+            where:{id: id},
+            data:{
+                name: event.name,
+                description: event.description,
+                date: event.date,
+                location: event.location,
+                createdBy: event.createdBy,
+                capacity: event.capacity,
+                remaining_capacity: event.remaining_capacity,
+                tags: event.tags
+            }
+        })
+        console.log("Event [",event.name,"] updated successfully !!!")
+    } catch (error) {
+        console.log("Error updating event",error)
+    }
+}
+
+
