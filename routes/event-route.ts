@@ -27,7 +27,7 @@ router.delete("/delete/:name", async (req, res) =>{
     const name: string = req.params.name
     try{
         await deleteEvent(name);
-        res.send('Event Deleted');
+        res.status(204).send('Event Deleted');
     } catch (error: any){
         console.log("Error deleting Event", error);
         if(error.message === 'This event doesnt exists'){
