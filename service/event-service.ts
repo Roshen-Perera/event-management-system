@@ -1,9 +1,9 @@
 import {Prisma, PrismaClient } from "@prisma/client";
-import Event from "../model/Event";
+import Events from "../model/Events";
 
 const prisma = new PrismaClient();
 
-export async function addEvent(event: Event) {
+export async function addEvent(event: Events) {
     console.log("Adding Event...");
     try{
         await prisma.event.create({

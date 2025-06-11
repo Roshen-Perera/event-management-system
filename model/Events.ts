@@ -1,4 +1,4 @@
-export default class Event {
+export default class Events {
     name!: string;
     description!: string;
     date!: Date;
