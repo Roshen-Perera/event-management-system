@@ -22,11 +22,11 @@ router.post("/add", async(req, res) => {
     }
 })
 
-router.delete("/delete/:name", async (req, res) =>{
+router.delete("/delete/:id", async (req, res) =>{
     console.log("Delete Event...");
-    const name: string = req.params.name
+    const id: string = req.params.id
     try{
-        await deleteEvent(name);
+        await deleteEvent(id);
         res.status(204).send('Event Deleted');
     } catch (error: any){
         console.log("Error deleting Event", error);
