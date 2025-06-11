@@ -18,7 +18,7 @@ export async function addEvent(event: Events) {
                 tags: event.tags
             }
         });
-        console.log("Event "+event.name+" added successfully !!!")
+        console.log("Event [",event.name,"] added successfully !!!")
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
             if (error.code === 'P2002') {
@@ -28,3 +28,21 @@ export async function addEvent(event: Events) {
         throw error;
     }
 }
+
+export async function deleteEvent(name: string){
+    try{
+        await prisma.event.delete({
+            where: {name: name}
+        })
+        console.log('Event Deleted : [',name,"]");
+    } catch (error) {
+        console.log("Error deleting event", error);
+        if(error instanceof Prisma.PrismaClientKnownRequestError){
+            if(error.code === 'P2025'){
+                throw new Error("The event with this name doesnt exists");
+            }
+        }
+        throw error;
+    }
+}
+

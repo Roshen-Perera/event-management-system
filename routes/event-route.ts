@@ -13,6 +13,7 @@ router.post("/add", async(req, res) => {
         res.status(201).send("Event Added")
     } catch (error: any){
         console.log("Error adding Event");
+        console.log(error.message)
         if (error.message === 'An event with this name already exists.') {
             res.status(400).send(error.message);
         } else {
