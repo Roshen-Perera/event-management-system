@@ -29,12 +29,12 @@ export async function addEvent(event: Events) {
     }
 }
 
-export async function deleteEvent(name: string){
+export async function deleteEvent(id: string){
     try{
         await prisma.event.delete({
-            where: {name: name}
+            where: {id: id}
         })
-        console.log('Event Deleted : [',name,"]");
+        console.log('Event Deleted : [',id,"]");
     } catch (error) {
         console.log("Error deleting event", error);
         if(error instanceof Prisma.PrismaClientKnownRequestError){

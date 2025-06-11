@@ -7,14 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Attendee {
+model attendee {
   name          String
-  email         String          @id @unique(map: "Attendee_email_key")
-  eventattendee EventAttendee[]
+  email         String          @id
+  eventattendee eventattendee[]
 }
 
-model Event {
-  name               String          @id @unique(map: "Event_name_key")
+model event {
+  id                 String          @id @default(uuid())
+  name               String
   description        String
   date               DateTime
   location           String
@@ -22,14 +23,14 @@ model Event {
   capacity           Int
   remaining_capacity Int
   tags               String
-  eventattendee      EventAttendee[]
+  eventattendee      eventattendee[]
 }
 
-model EventAttendee {
-  eventName     String
+model eventattendee {
+  eventId       String
   attendeeEmail String
-  attendee      Attendee @relation(fields: [attendeeEmail], references: [email], onDelete: Cascade, map: "EventAttendee_attendeeEmail_fkey")
-  event         Event    @relation(fields: [eventName], references: [name], onDelete: Cascade, map: "EventAttendee_eventName_fkey")
+  attendee      attendee @relation(fields: [attendeeEmail], references: [email], onDelete: Cascade)
+  event         event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  @@id([eventName, attendeeEmail])
+  @@id([eventId, attendeeEmail])
 }
