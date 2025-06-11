@@ -67,4 +67,12 @@ export async function updateField(id: string, event: Events){
     }
 }
 
+export async function getAllEvents(){
+    try{
+        return await prisma.event.findMany();
+    } catch (error){
+        console.log("Error getting events \n",error)
+    }
+}
+
 
