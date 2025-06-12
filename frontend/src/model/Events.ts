@@ -1,7 +1,8 @@
 export default class Events {
+    id!: string;
     name!: string;
     description!: string;
-    date!: Date;
+    date!: string;
     location!: string;
     createdBy!: string;
     capacity!: number;

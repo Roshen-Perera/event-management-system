@@ -27,7 +27,24 @@ const EventList = () => {
             <th scope="col">Tags</th>
           </tr>
         </thead>
-        <tbody id="crop-table"></tbody>
+        <tbody id="crop-table">
+          {events
+            .filter(
+              (event: Events, index, self) =>
+                event &&
+                index === self.findIndex((f: Events) => f?.id === event?.id)
+            )
+            .map((event: Events) => (
+              <tr key={event.name}>
+                <td className="font-medium">{event.description}</td>
+                <td>{event.date}</td>
+                <td>{event.location}</td>
+                <td>{event.createdBy}</td>
+                <td>{event.remaining_capacity}</td>
+                <td>{event.tags}</td>
+              </tr>
+            ))}
+        </tbody>
       </table>
     </div>
   );
