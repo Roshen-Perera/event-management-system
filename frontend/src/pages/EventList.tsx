@@ -35,11 +35,13 @@ const EventList = () => {
                 index === self.findIndex((f: Events) => f?.id === event?.id)
             )
             .map((event: Events) => (
-              <tr key={event.name}>
-                <td className="font-medium">{event.description}</td>
+              <tr key={event.id}>
+                <td>{event.name}</td>
+                <td>{event.description}</td>
                 <td>{event.date}</td>
                 <td>{event.location}</td>
                 <td>{event.createdBy}</td>
+                <td>{event.capacity}</td>
                 <td>{event.remaining_capacity}</td>
                 <td>{event.tags}</td>
               </tr>
