@@ -24,19 +24,13 @@ export function Navigation() {
           <div className="d-flex" role="search">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link
-                  to="/"
-                  className="text-gray-300 font-bold hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md"
-                >
-                  Home
+                <Link to="/" className="nav-link">
+                  Events
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
-                  to="/editEvent"
-                  className="text-gray-300 font-bold hover:text-white hover:bg-gray-700 px-3 py-2 rounded-md"
-                >
-                  Home
+                <Link to="/editEvent" className="nav-link">
+                  Edit Events
                 </Link>
               </li>
             </ul>
