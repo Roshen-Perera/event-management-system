@@ -1,6 +1,18 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type Events from "../model/Events";
+import { getEvent } from "../slices/EventSlice";
+import type { AppDispatch } from "../store/Store";
 import "./EditEvent.css";
 
 const EditEvent = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const events = useSelector((state: { event: Events[] }) => state.event);
+
+  useEffect(() => {
+    if (events.length === 0) dispatch(getEvent());
+  }, [dispatch, events.length]);
+
   return (
     <>
       <div className="custom-form">
@@ -64,8 +76,14 @@ const EditEvent = () => {
               aria-label="Remaining Capacity"
             />
           </div>
-          <div className="col p-3">
+          <div className="col-5">
             <label className="form-label">Tags</label>
+            <input type="text" className="form-control" aria-label="Tags" />
+          </div>
+        </div>
+        <div className="row p-1">
+          <label className="form-label">ID</label>
+          <div className="col-1">
             <input type="text" className="form-control" aria-label="Tags" />
           </div>
         </div>
@@ -108,7 +126,26 @@ const EditEvent = () => {
                 <th scope="col">Tags</th>
               </tr>
             </thead>
-            <tbody id="crop-table"></tbody>
+            <tbody id="crop-table">
+              {events
+                .filter(
+                  (event: Events, index, self) =>
+                    event &&
+                    index === self.findIndex((f: Events) => f?.id === event?.id)
+                )
+                .map((event: Events) => (
+                  <tr key={event.id}>
+                    <td>{event.name}</td>
+                    <td>{event.description}</td>
+                    <td>{event.date}</td>
+                    <td>{event.location}</td>
+                    <td>{event.createdBy}</td>
+                    <td>{event.capacity}</td>
+                    <td>{event.remaining_capacity}</td>
+                    <td>{event.tags}</td>
+                  </tr>
+                ))}
+            </tbody>
           </table>
         </div>
       </div>
