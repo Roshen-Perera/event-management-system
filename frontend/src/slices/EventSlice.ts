@@ -10,7 +10,7 @@ const api = axios.create({
 
 export const getEvent = createAsyncThunk("Event/getEvent", async () => {
   try {
-    const response = await api.get("/Event/get");
+    const response = await api.get("/event/get");
     console.log("response", response.data);
     return response.data;
   } catch (error) {
